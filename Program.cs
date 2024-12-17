@@ -4,7 +4,7 @@ using RoomService.PostAPI.RabbitMq;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.WebHost.UseUrls("http://0.0.0.0:4951");
+builder.WebHost.UseUrls("http://0.0.0.0:4961");
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
