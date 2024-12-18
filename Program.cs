@@ -27,12 +27,12 @@ builder.Services
 
 var app = builder.Build();
 
-// Configure middleware
+
 app.UseSwagger();
 app.UseSwaggerUI();
 app.UseCors("TyrSecretRoom");
 
-// Define POST endpoint
+// Endpoint för pots
 app.MapPost("/rooms", async (Room room, RabbitMqService rabbitMqService) =>
 {
     try
