@@ -18,7 +18,7 @@ builder.Services
             "TyrSecretRoom",
             policy =>
                 policy
-                    .WithOrigins("https://localhost:7151", "https://localhost:7173")
+                    .WithOrigins("https://localhost:7777")
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials()
@@ -31,6 +31,15 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 app.UseCors("TyrSecretRoom");
+
+app.MapMethods("/rooms", new[] { "OPTIONS" }, (HttpContext context) =>
+{
+    context.Response.Headers.Add("Access-Control-Allow-Origin", "http://localhost:7777");
+    context.Response.Headers.Add("Access-Control-Allow-Methods", "POST, OPTIONS");
+    context.Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type");
+    return Results.Ok();
+});
+
 
 // Endpoint för pots
 app.MapPost("/rooms", async (Room room, RabbitMqService rabbitMqService) =>
